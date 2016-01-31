@@ -13,13 +13,13 @@ int main() {
   setIntegrationTime(sensor, integrationTime);
   setGain(gain);
   enable(sensor);
-
+	
 	for (;;) {
 		uint16_t r, g, b, c, colorTemp, lux;
 		getRawData(sensor, &r, &g, &b, &c);
 		colorTemp = calculateColorTemperature(r, g, b);
 		lux = calculateLux(r, g, b);
-
+		
 		fprintf(stdout, "Color Temp: %d K - ", colorTemp);
 		fprintf(stdout, "Lux: %d - ", lux);
 		fprintf(stdout, "R: %d ", r);
