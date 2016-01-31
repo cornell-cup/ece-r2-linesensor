@@ -91,7 +91,7 @@ typedef struct {
 } Adafruit_TCS34725;
 
 
-Adafruit_TCS34725* begin(void);
+Adafruit_TCS34725* init_Adafruit_TCS34725(void);
 void               setIntegrationTime(Adafruit_TCS34725* sensor, tcs34725IntegrationTime_t it);
 void               setGain(Adafruit_TCS34725* sensor, tcs34725Gain_t gain);
 void               getRawData(Adafruit_TCS34725* sensor, uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c);
@@ -100,11 +100,14 @@ uint16_t           calculateLux(uint16_t r, uint16_t g, uint16_t b);
 void               write8 (Adafruit_TCS34725 *sensor, uint8_t reg, uint8_t data);
 uint8_t            read8 (Adafruit_TCS34725 *sensor, uint8_t reg);
 uint16_t           read16 (Adafruit_TCS34725 *sensor, uint8_t reg);
-// void               setInterrupt(Adafruit_TCS34725 *sensor,uint8_t flag);
-// void               clearInterrupt(Adafruit_TCS34725 *sensor);
-void               setIntLimits(Adafruit_TCS34725 *sensor,uint16_t l, uint16_t h);
 void               enable(Adafruit_TCS34725* sensor);
 void               disable(Adafruit_TCS34725* sensor);
+
+// TODO Interrupt support
+// void               setIntLimits(Adafruit_TCS34725 *sensor,uint16_t l, uint16_t h);
+// void               setInterrupt(Adafruit_TCS34725 *sensor,uint8_t flag);
+// void               clearInterrupt(Adafruit_TCS34725 *sensor);
+
 
 
 #endif /* COLOR_SENSOR_H_ */
