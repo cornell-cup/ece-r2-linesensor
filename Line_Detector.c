@@ -14,6 +14,13 @@ int main() {
   setGain(gain);
   enable(sensor);
 
+  // looping procedure
+  read_values(sensor);
+
+  return 0;
+}
+
+void read_values(Adafruit_TCS34725* sensor) {
   for (;;) {
     uint16_t r, g, b, c, colorTemp, lux;
     getRawData(sensor, &r, &g, &b, &c);
@@ -27,6 +34,5 @@ int main() {
     fprintf(stdout, "B: %d ", b);
     fprintf(stdout, "C: %d \n", c);
   }
-  return 0;
-
 }
+
