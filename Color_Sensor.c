@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Color_Sensor_6.h"
+#include "Color_Sensor.h"
 #include <math.h>
 
 float powf(const float x, const float y) {
@@ -57,7 +57,7 @@ Adafruit_TCS34725* init_Adafruit_TCS34725(void) {
 
 uint8_t read8(Adafruit_TCS34725* sensor, uint8_t reg) {
 	check_mraa("read8", "Address setting",
-		mraa_i2c_address(sensor->i2c, TCS34725_ADDRESS));
+             mraa_i2c_address(sensor->i2c, TCS34725_ADDRESS));
 
 	uint8_t read = mraa_i2c_read_byte_data(sensor->i2c, TCS34725_COMMAND_BIT | reg);
 	if (read == 0)
@@ -68,20 +68,20 @@ uint8_t read8(Adafruit_TCS34725* sensor, uint8_t reg) {
 
 void write8 (Adafruit_TCS34725* sensor, uint8_t reg, uint8_t data) {
 	check_mraa("write8", "Address setting",
-		mraa_i2c_address(sensor->i2c, TCS34725_ADDRESS));
+             mraa_i2c_address(sensor->i2c, TCS34725_ADDRESS));
 
 	check_mraa("write8", "Write",
-		mraa_i2c_write_byte_data(sensor->i2c, data, TCS34725_COMMAND_BIT | reg));
+             mraa_i2c_write_byte_data(sensor->i2c, data, TCS34725_COMMAND_BIT | reg));
 	return;
 }
 
 uint16_t read16(Adafruit_TCS34725 *sensor, uint8_t reg) {
 	check_mraa("read16", "Address setting",
-		mraa_i2c_address(sensor->i2c, TCS34725_ADDRESS));
+             mraa_i2c_address(sensor->i2c, TCS34725_ADDRESS));
 
 	uint8_t data[2];
 	int len = mraa_i2c_read_bytes_data(sensor->i2c, TCS34725_COMMAND_BIT | reg,
-			data, 2);
+                                     data, 2);
 	if(len != 2)
 		fprintf(stderr, "read16: Could not read all 16 bits.\n");
 
@@ -128,7 +128,7 @@ void disable(Adafruit_TCS34725 *sensor) {
 }
 
 void getRawData (Adafruit_TCS34725 *sensor, uint16_t *r,
-                uint16_t *g, uint16_t *b, uint16_t *c)
+                 uint16_t *g, uint16_t *b, uint16_t *c)
 {
 	*c = read16(sensor, TCS34725_CDATAL);
 	*r = read16(sensor, TCS34725_RDATAL);

@@ -6,10 +6,7 @@
  ******************************************************************************/
 
 #include "Color_Sensor.h"
-
-tcs34725IntegrationTime_t integrationTime = TCS34725_INTEGRATIONTIME_50MS;
-tcs34725Gain_t gain = TCS34725_GAIN_4X;
-
+#include <math.h>
 
 // Print raw RGB values from the adc's
 void raw_loop(Adafruit_TCS34725* sensor);
@@ -22,3 +19,5 @@ void rgb_loop(Adafruit_TCS34725* sensor);
 // Uses gamma decoding to make an RGB led display the color read by the color
 // sensor.
 void gamma_loop(Adafruit_TCS34725* sensor);
+
+void detect_loop(Adafruit_TCS34725* sensor);

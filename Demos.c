@@ -8,25 +8,15 @@
 
 #include "Demos.h"
 
-/* int main() { */
-/*   // initialize sensor */
-/*   Adafruit_TCS34725* sensor = init_Adafruit_TCS34725(); */
-/*   if (sensor == NULL) { */
-/*     fprintf(stdout, "Sensor was null"); */
-/*     return 1; */
-/*   } */
-/*   setIntegrationTime(sensor, integrationTime); */
-/*   setGain(sensor, gain); */
-/*   enable(sensor); */
+#define rmax 105
+#define rmin 90
+#define gmax 105
+#define gmin 90
+#define bmax 55
+#define bmin 45
 
-/*   // looping procedure */
-/*   fprintf(stderr, "starting loop\n"); */
-
-/*   read_loop(sensor); */
-/*   // gamma_loop(sensor); */
-
-/*   return 0; */
-/* } */
+// TODO make a method for compution rgb as fraction of clear
+// TODO consistent indentation (no tabs, tab = 2 space)
 
 void raw_loop(Adafruit_TCS34725* sensor) {
   for (;;) {
@@ -53,8 +43,8 @@ void raw_loop(Adafruit_TCS34725* sensor) {
 }
 
 void rgb_loop(Adafruit_TCS34725* sensor) {
-	uint16_t red, green, blue, clear;
-	uint32_t sum;
+  uint16_t red, green, blue, clear;
+  uint32_t sum;
 	double r, g, b;
 
   for (;;) {
@@ -103,4 +93,41 @@ void gamma_loop(Adafruit_TCS34725* sensor) {
     fprintf(stdout, "R: %d, G: %d, B: %d\n", gammatable[(int)r],            
     				gammatable[(int)g], gammatable[(int)b]);
 	}
+}
+
+void detect_loop(Adafruit_TCS34725* sensor) {
+	uint16_t red, green, blue, clear;
+	uint32_t sum;
+	double r, g, b;
+	int rval, gval, bval;
+
+	// persistence filter
+	int count = 3;
+	int current = 0;
+
+
+  for (;;) {
+    setInterrupt(sensor, 0);
+    usleep(60);
+    getRawData(sensor, &red, &green, &blue, &clear);
+    setInterrupt(sensor, 1);
+    sum = clear;
+    r = red; r /= sum; r *= 256;
+    g = green; g /= sum; g *= 256;
+    b = blue; b /= sum; b *= 256;
+    rval = (int)r;
+    gval = (int)g;
+    bval = (int)b;
+
+    if((rval > rmin) && (rval < rmax) && (gval > gmin) && (gval < gmax) && (bval > bmin) && (bval < bmax)) {
+      if(current == 2) {
+        fprintf(stdout, "Detected\n");
+      } else {
+        current++;
+      }
+    } else {
+      fprintf(stdout, "Not detected\n");
+      current = 0;
+    }
+  }
 }
