@@ -11,7 +11,7 @@ int main() {
     return 1;
   }
   setIntegrationTime(sensor, integrationTime);
-  setGain(gain);
+  setGain(sensor, gain);
   enable(sensor);
 
   // looping procedure
