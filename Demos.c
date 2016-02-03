@@ -104,7 +104,7 @@ void detect_loop(Adafruit_TCS34725* sensor) {
 	// persistence filter
 	int count = 3;
 	int current = 0;
-
+  int detected = 0;
 
   for (;;) {
     setInterrupt(sensor, 0);
@@ -120,14 +120,15 @@ void detect_loop(Adafruit_TCS34725* sensor) {
     bval = (int)b;
 
     if((rval > rmin) && (rval < rmax) && (gval > gmin) && (gval < gmax) && (bval > bmin) && (bval < bmax)) {
-      if(current == 2) {
-        fprintf(stdout, "Detected\n");
-      } else {
-        current++;
-      }
+      if (current == 2) detected = 1;
+      current = (current == count) ? count : current + 1;
     } else {
-      fprintf(stdout, "Not detected\n");
-      current = 0;
+      if (current == 1) detected = 0;
+      current = (current == 0) ? 0 : current - 1;
     }
+
+    if (detected) {fprintf(stdout, "Detected\n");}
+    else {fprintf(stdout, "Not Detected\n");}
+    
   }
 }
