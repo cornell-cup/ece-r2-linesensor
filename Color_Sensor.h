@@ -1,9 +1,10 @@
-/*
+/*******************************************************************************
  * Color_Sensor.h
- *
- *  Created on: Nov 20, 2015
- *      Author: CornellCup
- */
+ * 
+ * Important Links:
+ * https://www.adafruit.com/datasheets/TCS34725.pdf
+ * https://github.com/adafruit/Adafruit_TCS34725
+ ******************************************************************************/
 
 
 #ifndef COLOR_SENSOR_H_
@@ -102,12 +103,12 @@ uint8_t            read8 (Adafruit_TCS34725 *sensor, uint8_t reg);
 uint16_t           read16 (Adafruit_TCS34725 *sensor, uint8_t reg);
 void               enable(Adafruit_TCS34725* sensor);
 void               disable(Adafruit_TCS34725* sensor);
+void               setInterrupt(Adafruit_TCS34725 *sensor,uint8_t flag);
 
 // TODO Interrupt support
 // void               setIntLimits(Adafruit_TCS34725 *sensor,uint16_t l, uint16_t h);
-// void               setInterrupt(Adafruit_TCS34725 *sensor,uint8_t flag);
 // void               clearInterrupt(Adafruit_TCS34725 *sensor);
 
 
 
-#endif /* COLOR_SENSOR_H_ */
+#endif
