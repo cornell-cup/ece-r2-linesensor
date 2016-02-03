@@ -1,9 +1,10 @@
 /*******************************************************************************
- * Color_Sensor.h
+ * Filename: Color_Sensor.c
  * 
  * Important Links:
  * https://www.adafruit.com/datasheets/TCS34725.pdf
  * https://github.com/adafruit/Adafruit_TCS34725
+ * http://iotdk.intel.com/docs/master/mraa/index.html
  ******************************************************************************/
 
 #include <stdio.h>

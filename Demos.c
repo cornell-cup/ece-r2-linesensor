@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Filename: Demos.c
+ * 
+ * Important Links:
+ * https://github.com/adafruit/Adafruit_TCS34725
+ * http://iotdk.intel.com/docs/master/mraa/index.html
+ ******************************************************************************/
+
 #include "Demos.h"
 
 /* int main() { */
@@ -62,6 +70,7 @@ void rgb_loop(Adafruit_TCS34725* sensor) {
   }
 }
 
+// TODO
 // Uses gamma decoding to make an RGB led display the color read by the
 // color sensor.
 void gamma_loop(Adafruit_TCS34725* sensor) {
@@ -91,7 +100,7 @@ void gamma_loop(Adafruit_TCS34725* sensor) {
 		g = green; g /= sum; g *= 256;
 		b = blue; b /= sum; b *= 256;
     //		fprintf(stdout, "R: %d, G: %d, B: %d\n", (int)r, (int)g, (int)b);
-    //		fprintf(stdout, "R: %d, G: %d, B: %d\n", gammatable[(int)r],
-    //				gammatable[(int)g], gammatable[(int)b]);
+    fprintf(stdout, "R: %d, G: %d, B: %d\n", gammatable[(int)r],            
+    				gammatable[(int)g], gammatable[(int)b]);
 	}
 }

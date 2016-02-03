@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Filename: Main.c
+ ******************************************************************************/
+
 #include "Demos.h"
 
 int main() {
@@ -12,8 +16,6 @@ int main() {
   enable(sensor);
 
   // looping procedure
-  fprintf(stderr, "starting loop\n");
-
   // raw_loop(sensor);
   rgb_loop(sensor);
   // gamma_loop(sensor);
