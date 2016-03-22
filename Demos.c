@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Filename: Demos.c
- * 
+ *
  * Important Links:
  * https://github.com/adafruit/Adafruit_TCS34725
  * http://iotdk.intel.com/docs/master/mraa/index.html
@@ -22,7 +22,7 @@ void raw_loop(Adafruit_TCS34725* sensor) {
   for (;;) {
     uint16_t red, green, blue, clear, colorTemp, lux;
     /***************************************************************************
-     * setInterrupt(sensor, 0) turns the led on and setInterrupt(sensor, 1) 
+     * setInterrupt(sensor, 0) turns the led on and setInterrupt(sensor, 1)
      * turns it off. This and the 60ms results in faster responses times, likely
      * as a result of the photodiode's operation.
      **************************************************************************/
@@ -48,15 +48,17 @@ void rgb_loop(Adafruit_TCS34725* sensor) {
 	double r, g, b;
 
   for (;;) {
-    setInterrupt(sensor, 0);
+    //setInterrupt(sensor, 0);
     usleep(60);
     getRawData(sensor, &red, &green, &blue, &clear);
-    setInterrupt(sensor, 1);
+    //setInterrupt(sensor, 1);
+
+    usleep(500000);
     sum = clear;
     r = red; r /= sum; r *= 256;
-		g = green; g /= sum; g *= 256;
-		b = blue; b /= sum; b *= 256;
-		fprintf(stdout, "R: %d, G: %d, B: %d\n", (int)r, (int)g, (int)b);
+    g = green; g /= sum; g *= 256;
+    b = blue; b /= sum; b *= 256;
+    fprintf(stdout, "R: %d, G: %d, B: %d\n", (int)r, (int)g, (int)b);
   }
 }
 
@@ -90,7 +92,7 @@ void gamma_loop(Adafruit_TCS34725* sensor) {
 		g = green; g /= sum; g *= 256;
 		b = blue; b /= sum; b *= 256;
     //		fprintf(stdout, "R: %d, G: %d, B: %d\n", (int)r, (int)g, (int)b);
-    fprintf(stdout, "R: %d, G: %d, B: %d\n", gammatable[(int)r],            
+    fprintf(stdout, "R: %d, G: %d, B: %d\n", gammatable[(int)r],
     				gammatable[(int)g], gammatable[(int)b]);
 	}
 }
@@ -104,13 +106,15 @@ void detect_loop(Adafruit_TCS34725* sensor) {
 	// persistence filter
 	int count = 3;
 	int current = 0;
-  int detected = 0;
+    int detected = 0;
 
   for (;;) {
-    setInterrupt(sensor, 0);
-    usleep(60);
+    //setInterrupt(sensor, 0);
+    //usleep(60);
     getRawData(sensor, &red, &green, &blue, &clear);
-    setInterrupt(sensor, 1);
+    //setInterrupt(sensor, 1);
+
+    usleep(1000000);
     sum = clear;
     r = red; r /= sum; r *= 256;
     g = green; g /= sum; g *= 256;
@@ -118,6 +122,9 @@ void detect_loop(Adafruit_TCS34725* sensor) {
     rval = (int)r;
     gval = (int)g;
     bval = (int)b;
+
+    printf("%d %d %d %d\n", red, green, blue, sum);
+    printf("%d %d %d\n", rval, gval, bval);
 
     if((rval > rmin) && (rval < rmax) && (gval > gmin) && (gval < gmax) && (bval > bmin) && (bval < bmax)) {
       if (current == 2) detected = 1;
@@ -129,6 +136,6 @@ void detect_loop(Adafruit_TCS34725* sensor) {
 
     if (detected) {fprintf(stdout, "Detected\n");}
     else {fprintf(stdout, "Not Detected\n");}
-    
+
   }
 }

@@ -43,7 +43,7 @@
 #define COLOR_SENSOR_H_
 #include <stdint.h>
 #include <mraa.h>
-#include <linux/i2c.h>
+//#include <i2c.h>
 
 #define TCS34725_ADDRESS          (0x29)
 
