@@ -1,11 +1,25 @@
 /*******************************************************************************
  * Filename: Color_Sensor.c
- * 
+ *
  * Important Links:
  * https://www.adafruit.com/datasheets/TCS34725.pdf
  * https://github.com/adafruit/Adafruit_TCS34725
  * http://iotdk.intel.com/docs/master/mraa/index.html
  ******************************************************************************/
+
+ /**************************************************************************/
+ /*!
+     @file     Adafruit_TCS34725.cpp
+     @author   KTOWN (Adafruit Industries)
+     @license  BSD (see license.txt)
+     Driver for the TCS34725 digital color sensors.
+     Adafruit invests time and resources providing this open source code,
+     please support Adafruit and open-source hardware by purchasing
+     products from Adafruit!
+     @section  HISTORY
+     v1.0 - First release
+ */
+ /**************************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
