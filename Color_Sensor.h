@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Filename: Color_Sensor.h
- * 
+ *
  * Important Links:
  * https://www.adafruit.com/datasheets/TCS34725.pdf
  * https://github.com/adafruit/Adafruit_TCS34725
@@ -11,8 +11,8 @@
 #ifndef COLOR_SENSOR_H_
 #define COLOR_SENSOR_H_
 #include <stdint.h>
-#include "mraa.h"
-#include "i2c.h"
+#include <mraa.h>
+#include <linux/i2c.h>
 
 #define TCS34725_ADDRESS          (0x29)
 
