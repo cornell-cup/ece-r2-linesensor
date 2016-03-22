@@ -1,11 +1,25 @@
 /*******************************************************************************
  * Filename: Color_Sensor.c
- * 
+ *
  * Important Links:
  * https://www.adafruit.com/datasheets/TCS34725.pdf
  * https://github.com/adafruit/Adafruit_TCS34725
  * http://iotdk.intel.com/docs/master/mraa/index.html
  ******************************************************************************/
+
+ /**************************************************************************/
+ /*!
+     @file     Adafruit_TCS34725.cpp
+     @author   KTOWN (Adafruit Industries)
+     @license  BSD (see license.txt)
+     Driver for the TCS34725 digital color sensors.
+     Adafruit invests time and resources providing this open source code,
+     please support Adafruit and open-source hardware by purchasing
+     products from Adafruit!
+     @section  HISTORY
+     v1.0 - First release
+ */
+ /**************************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,7 +52,7 @@ Adafruit_TCS34725* init_Adafruit_TCS34725(void) {
 		return NULL;
 	}
 	fprintf(stderr, "begin: Initialization was successful.\n");
-	fprintf(stderr, "begin: Done initialization.");
+	fprintf(stderr, "begin: Done initialization.\n");
 
 	// Make sure we're actually connected
 	fprintf(stderr, "begin: Starting self-test...\n");
@@ -139,22 +153,22 @@ void getRawData (Adafruit_TCS34725 *sensor, uint16_t *r,
 	switch (sensor->_tcs34725IntegrationTime)
 		{
 		case TCS34725_INTEGRATIONTIME_2_4MS:
-			usleep(3);
+			usleep(3000);
 			break;
 		case TCS34725_INTEGRATIONTIME_24MS:
-			usleep(24);
+			usleep(24000);
 			break;
 		case TCS34725_INTEGRATIONTIME_50MS:
-			usleep(50);
+			usleep(50000);
 			break;
 		case TCS34725_INTEGRATIONTIME_101MS:
-			usleep(101);
+			usleep(101000);
 			break;
 		case TCS34725_INTEGRATIONTIME_154MS:
-			usleep(154);
+			usleep(154000);
 			break;
 		case TCS34725_INTEGRATIONTIME_700MS:
-			usleep(700);
+			usleep(700000);
 			break;
 		}
 }
